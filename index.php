@@ -34,7 +34,7 @@
 
       </ul>
       <span class="navbar-text">
-        NAMA USERS
+        NAMA USER
       </span>
     </div>
   </div>
