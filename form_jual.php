@@ -53,7 +53,9 @@ $harga_sampah = $result['harga'];
 <body>
 <nav class="navbar navbar-expand-lg" style="background-color: rgba(127, 255, 0, 1.0); position:sticky; top:0;">
   <div class="container-fluid">
+    <a href="index.php">
     <img src="logo.png" width="60px"/>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

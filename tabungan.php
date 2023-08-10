@@ -1,7 +1,5 @@
-<?php
-     include "koneksi.php";
+<?php include 'koneksi.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +18,6 @@
             $('#dt').DataTable();
           });
         </script>
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg" style="background-color: rgba(127, 255, 0, 1.0); position:sticky; top:0;">
@@ -40,20 +37,8 @@
       </span>
     </div>
   </div>
-</nav>
+</nav> 
 
-<div class=" container-fluid   d-flex align-items-start justify-content-center  flex-column" style="height: 500px;" >
-    <h1 class="pt-5">Selamat Datang, Nama Users</h1>
-    <p>ini adalah website resmi dari BANK SAMPAH BANTUL Daerah Istimewa Yogyakarta (DIY).<br>Disini anda dapat menjual barang bekas anda yang sudah tidak terpakai</p>
-   <div class="d-flex flex-row">
-    <a href="data_harga.php" class="btn btn-primary me-2">Data Sampah</a>
-    <a href="form_jual.php" class="btn btn-primary">Jual Sampah</a></div>
-</div>
-<center>
-lihat data penjualan ada<br>   
-<span class="material-symbols-outlined">
-keyboard_double_arrow_down
-</span></center>
 
 <table id="dt" class="table align-middle   cell-border stripe hover">
           <thead>
@@ -65,34 +50,39 @@ keyboard_double_arrow_down
               <th>jumlah</th>
               <th>harga</th>
               <th>tanggal</th>
-              <th>total</th>
             </tr>
             </thead>
           <tbody>
             <?php 
             $no=1;
-            $total=0;
-            $query = "SELECT setor.*, users.username,users.id_users, sampah.nama_sampah, sampah.harga_sampah FROM setor 
-                   INNER JOIN users ON  setor.id_users=users.id_users
-                   INNER JOIN sampah ON setor.id_sampah=sampah.id_sampah;";
+            $query = "SELECT setor.*, users.username,users.id_users, sampah.nama_sampah,  SUM(setor.jumlah_sampah)  AS jumlah_total, SUM(setor.jumlah_sampah) * sampah.harga_sampah AS harga_total FROM setor 
+            INNER JOIN users ON  setor.id_users=users.id_users
+            INNER JOIN sampah ON setor.id_sampah=sampah.id_sampah
+            GROUP BY users.id_users, sampah.nama_sampah;";
+            $query2 ="SELECT setor.*, SUM(sampah.harga_sampah) FROM setor  
+            INNER JOIN sampah ON setor.id_sampah=sampah.id_sampah
+            GROUP BY sampah.harga_sampah;";
             $sql=mysqli_query($koneksi, $query) or die (mysqli_error($koneksi));
-            while ($data = mysqli_fetch_array($sql)) 
-            { $total = $data['harga_sampah'] * $data['jumlah_sampah']; ?>
+            $sql2=mysqli_query($koneksi, $query2) or die (mysqli_error($koneksi));
+            //$t = mysqli_fetch_array($sql);
+            while ($data = mysqli_fetch_array($sql))
+            //var_dump($t['username']);
+            //while ($data2 = mysqli_fetch_array($sql2)) 
+            { $total = $data['harga_sampah'] + $data['harga_total'];
+             ?>
             <tr>
               <td><?=$no++?>.</td>
               <td><?=$data['id_users']?>.</td>
               <td><?=$data['username']?>.</td>
               <td><?=$data['nama_sampah']?>.</td>
-              <td><?=$data['jumlah_sampah']?>.</td>
-              <td>Rp.<?=$data['harga_sampah']?>.</td>
+              <td><?=$data['jumlah_total']?></td>
+              <td><?=$data['harga_total']?></td>
               <td><?=$data['Tanggal']?>.</td>
-              <td>Rp.<?php echo number_format($total);?>.</td>
             </tr>
             <?php
             }
         ?>
             </tbody>
         </table>
-
 </body>
 </html>
