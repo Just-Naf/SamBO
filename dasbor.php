@@ -152,7 +152,7 @@ if (!isset($_SESSION['username'])) {
                       </div>
                       <div class="col-md-6 col-xl report-inner-card">
                         <div class="inner-card-text">
-                          <span class="report-title">QUANTITY</span>
+                          <span class="report-title">TABUNGAN</span>
                           <h4>2650</h4>
                           <span class="report-count"> 5 Reports</span>
                         </div>
