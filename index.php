@@ -24,10 +24,10 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg px-3" style="background-color: rgba(127, 255, 0, 1.0); position:sticky; top:0;">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg px-3" style="background-color:#ffffff00;">
+  <div class="container-fluid" style="margin: 0px 150px;">
   <a href="index.php">
-    <img src="logo.png" width="60px"/>
+    <img src="logo.png" width="80px"/>
   </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -43,18 +43,49 @@
   </div>
 </nav>
 
-<div class="d-flex align-items-start justify-content-center flex-column"  style="height: 500px; width: 1350px;" >
-    <h1 class="pt-5" style=" padding-left: 50px;">Selamat Datang Di Bank Sampah</h1>
-    <p style=" padding-left: 50px;">ini adalah website resmi dari BANK SAMPAH BANTUL Daerah Istimewa Yogyakarta (DIY).<br>Disini anda dapat menjual barang bekas anda yang sudah tidak terpakai</p>
-   <div class="d-flex flex-row" style=" padding-left: 50px;">
+<div class="d-flex align-items-center justify-content-center flex-column "  style="height: 120vh; width: auto; font-size:x-large;     background-image: url(bg.jpg); background-size:cover;
+" >
+    <h1 class="" style="">Selamat Datang Di Bank Sampah</h1>
+    <p style="text-align:center;">ini adalah website resmi dari BANK SAMPAH BANTUL Daerah Istimewa Yogyakarta (DIY).<br>Disini anda dapat menjual barang bekas anda yang sudah tidak terpakai</p>
+   <div class="d-flex flex-row" style="">
     <a href="data_harga.php" class="btn btn-primary me-2">Data Sampah</a>
-    <a href="form_jual.php" class="btn btn-primary">Jual Sampah</a></div>
+    <a href="form_jual.php" class="btn btn-primary ">Jual Sampah</a></div>
+    <center>
+    <p class="fs-5" style="margin-top:150px; margin-bottom: 100px;">lihat data penjualan ada<br>   
+    <span class="material-symbols-outlined">
+    keyboard_double_arrow_down
+    </span></p></center>
 </div>
-<center>
-lihat data penjualan ada<br>   
-<span class="material-symbols-outlined">
-keyboard_double_arrow_down
-</span></center>
+
+
+<div class="parent">
+<div class="div1">
+  <div class="dutaSam"></div>
+  <div class="dutaSam2"></div>
+</div>
+<div class="div2">
+  <div class="nas row">
+    <div class="col">
+  <p class="text-center">2023</p>
+  <h5 class="text-center">nama</h5>
+    </div>
+    <div class="col">
+  <p class="text-center">2023</p>
+  <h5 class="text-center">nama</h5>
+    </div>
+    <div class="col">
+  <p class="text-center">2023</p>
+  <h5 class="text-center">nama</h5>
+    </div>
+  </div> 
+  <a href="#"class="btn btn-success p-3 mt-2 px-5 rounded-pill">cari tau lebih lanjut</a>
+</div>
+<div class="div3">    
+  <h1>Visi Kami Terciptanya Lingkungan Yang Lestari</h1>
+  <p>Sistem Bank Sampah Digital mendorong partisipasi aktif untuk memilah dan menabung sampah dengan bertujuan untuk membuat masyarakat lebih berdaya, lingkungan lebih <br>lestari dan membangun budaya gotong royong antar masyarakat</p>
+</div>
+</div>
+
           <div class="m-5 p-3 shadow rounded" >
 <table id="dt" class="table align-middle cell-border stripe hover">
           <thead>
