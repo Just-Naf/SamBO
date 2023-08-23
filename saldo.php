@@ -26,7 +26,10 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="./vendors/daterangepicker/daterangepicker.css">
@@ -66,7 +69,7 @@
                 <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <?php
                 echo "<span class='navbar-text'><b>". $_SESSION['username'] ."</b></span>";?></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                <a href="logout.php" class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+                <a href="./data-login/logout.php" class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
               </div>
             </li>
           </ul>
@@ -103,11 +106,18 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/tables/basic-table.html">
-                <span class="menu-title">Tables</span>
+              <a class="nav-link" href="dtsampah.php">
+                <span class="menu-title">Data Sampah</span>
                 <i class="icon-grid menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="jual_sampah.php">
+                <span class="menu-title">Jual Sampah</span>
+                <i class="icon-grid menu-icon"></i>
+              </a>
+            </li>
+
 
           </ul>
         </nav>
@@ -122,87 +132,7 @@
               </div>
             </div>     
                
-             <div class="row">
-              <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex align-items-center mb-4">
-                      <h4 class="card-title mb-sm-0">Riwayat Penjualan</h4>
-                      <a href="#" class="text-dark ml-auto mb-3 mb-sm-0"> View all Products</a>
-                    </div>
-
-
-                    <div class="table-responsive border rounded p-1">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th class="font-weight-bold">No</th>
-                            <th class="font-weight-bold">nama</th>
-                            <th class="font-weight-bold">barang</th>
-                            <th class="font-weight-bold">jumlah</th>
-                            <th class="font-weight-bold">harga</th>
-                            <th class="font-weight-bold">Tanggal</th>
-                            <th class="font-weight-bold">Total</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <?php 
-            $no=1;
-            $query = "SELECT setor.id_users, users.username, setor.jumlah_sampah, setor.Tanggal,  
-            sampah.harga_sampah, 
-            sampah.nama_sampah, 
-            SUM(setor.jumlah_sampah) * sampah.harga_sampah AS harga_total 
-            FROM setor 
-            INNER JOIN users ON  setor.id_users=users.id_users
-            INNER JOIN sampah ON setor.id_sampah=sampah.id_sampah
-            WHERE setor.id_users='$_SESSION[id_users]'
-            GROUP BY setor.id_setor;";
-            $sql=mysqli_query($koneksi, $query) or die (mysqli_error($koneksi));
-            //$sql2=mysqli_query($koneksi, $query2) or die (mysqli_error($koneksi));
-            //$t = mysqli_fetch_array($sql);
-            while ($data = mysqli_fetch_array($sql))
-            //var_dump($t['username']);
-            //while ($data2 = mysqli_fetch_array($sql2)) 
-            { //$total = $data['harga_sampah'] + $data['harga_total'];
-             ?>
-            <tr>
-              <td><?=$no++?>.</td>
-              <td><?=$data['id_users']?>.</td>
-              <td><?=$data['username']?>.</td>
-              <td><?=$data['nama_sampah']?>.</td>
-              <td><?=$data['jumlah_sampah']?></td>
-              <td><?=$data['harga_sampah']?></td>
-              <td><?=$data['harga_total']?></td>
-              <td><?=$data['Tanggal']?>.</td>
-            </tr>
-                          <?php
-            }
-        ?>
-                        </tbody>
-                      </table>
-
-                      <?php
-                    
-                      ?>
-
-                    </div>
-                    <div class="d-flex mt-4 flex-wrap">
-                      <p class="text-muted">Showing 1 to 10 of 57 entries</p>
-                      <nav class="ml-auto">
-                        <ul class="pagination separated pagination-info">
-                          <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
-                          <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                          <li class="page-item"><a href="#" class="page-link">2</a></li>
-                          <li class="page-item"><a href="#" class="page-link">3</a></li>
-                          <li class="page-item"><a href="#" class="page-link">4</a></li>
-                          <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+             
             <div class="row">
               <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
@@ -293,14 +223,46 @@
               <td><?=$data2['tabungan']?></td>
 
             </tbody>              
-            <?php
-              echo "<a href='tarik.php?id_setor=".$data2['id_setor']."' class='btn btn-danger'>tarik</a>";
+            </table>
+            </div>
+            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+  Tarik Saldo
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">TARIK SALDO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Yakin ingin melakukan penarikan ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <?php
+             echo "<a href='tarik.php?id_setor=".$data2['id_setor']."' class='tbl-yakin btn btn-primary'>Yakin</a>"; ?>
+      </div>
+    </div>
+  </div>
+</div>
+<script>document.querySelector(".tbl-yakin").addEventListener('click', function(){
+Swal.fire({
+  icon: 'success',
+  title: 'Oops...',
+  text: 'Something went wrong!',
+} ,300000)
+});
+</script>
+            <?php
             }
         ?>
-        </table>
 
-                    </div>
 
                     </div>
                     <div id="performance-indicator-chart" class="ct-chart mt-4"></div>
